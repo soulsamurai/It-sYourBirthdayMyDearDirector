@@ -8,7 +8,7 @@ const quizData = [
         answers: ["Плетка", "Книга", "Мяч"],
         correct: 0,
         description: '🐼 <strong>Плетка</strong> — по очевидным причинам!',
-        videoUrl: ""
+        videoUrl: "videos/Видео - Алина.mp4"
     },
     {
         question: "У кого был самый долгий обед в истории SD?",
