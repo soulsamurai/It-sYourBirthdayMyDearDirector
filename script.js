@@ -5,7 +5,7 @@
 const quizData = [
     {
         question: "Какой предмет в лапах держит Настина панда?",
-        answers: ["Плетка", "Книга", "Мяч"],
+        answers: ["Плетка", "Книга", "Мяч", "Пицца"],
         correct: 0,
         description: '🐼 <strong>Плетка</strong> — по очевидным причинам!',
         videoUrl: "videos/Видео - Алина.mp4"
@@ -26,7 +26,7 @@ const quizData = [
     },
     {
         question: "Какой сериал пересматривала Настя в соответствии с информацией на странице Confluence?",
-        answers: ["Большой взрыв", "Детство Шелдона", "Друзья", "Счастливы вместе"],
+        answers: ["Теория большого взрыва", "Детство Шелдона", "Друзья", "Счастливы вместе"],
         correct: 0,
         description: '📺 <strong>Большой взрыв</strong> — «Счастливы вместе» тоже неплох!',
         videoUrl: ""
@@ -67,6 +67,13 @@ const quizData = [
         videoUrl: ""
     },
     {
+        question: "Сколько человек пополнили ряды группы Предоставления доступов с 2025 года?",
+        answers: ["2", "5", "3", "4"],
+        correct: 3,
+        description: ' Надеемся, что начальник никого не забыл 🤣',
+        videoUrl: ""
+    },
+    {
         question: "Кто такие вымышленные сказочные существа, которые питаются янтарной энергией и приносят людям счастье и добро, и являются неофициальным символом Калининграда?",
         answers: ["Домовые", "Сотрудники предоставления доступов", "Хомлины", "Гномы"],
         correct: 2,
@@ -89,6 +96,13 @@ const quizData = [
         videoUrl: ""
     },
     {
+        question: "Сколько грамот программы признания Насти, как лучшего сотрудника ГО, находятся на полке в рядах ServiceDesk?",
+        answers: ["3", "4", "6", "10"],
+        correct: 1,
+        description: 'Абсолютный рекорд числа грамот на полке в Москве 🥳',
+        videoUrl: ""
+    },
+    {
         question: "Руководителя какого отдела не смогла уволить система IDM?",
         answers: ["Отдел администрирования пользователей", "Отдел сопровождения пользователей", "Отдел управления правами", "Группа Предоставление доступов"],
         correct: 2,
@@ -103,6 +117,14 @@ const quizData = [
         videoUrl: ""
     },
     {
+        question: "Чей это рабочий стол?",
+        answers: ["Влад", "Темур", "Вероника", "Олег"],
+        correct: 3,
+        description: '🦮 <strong>Точно не Влад</strong> —  – сильно чисто',
+        //imageUrl: "Homlin/Хомлин.jpg",
+        videoUrl: ""
+    },
+    {
         question: "Назовите имя устройства Германовой Анастасии.",
         answers: ["MSK-MOB-123456", "TOM-CSPKO-1488", "MSK-140798", "MAC-500000"],
         correct: 2,
@@ -113,7 +135,15 @@ const quizData = [
         question: "Любимый вид удалённых рабочих столов у Насти.",
         answers: ["TS-столы", "WS-столы", "DEV-столы", "CC-столы"],
         correct: 2,
-        description: '🖥️ <strong>DEV-столы</strong> — Серж, я больше не выдам тебе DEV-стол, чтобы что-то потестировать!',
+        description: '🖥️ <strong>DEV-столы</strong> — Серж, я больше не выдам тебе DEV-стол, чтобы что-то протестировать!',
+        videoUrl: ""
+    },
+    {
+        question: "Определи сотрудника по скриншоту видео в MTS-Link.",
+        answers: ["Олег", "Даша", "Темур", "Катя"],
+        correct: 2,
+        description: '❗ <strong>Главное </strong> — не смотреть в монитор Сержа (помогает с VPN)',
+        imageUrl: "Homlin/Силует.png",
         videoUrl: ""
     }
 ];
@@ -600,7 +630,7 @@ const balloonColors = [
 
 // Pre-load balloon photos
 const balloonImages = [];
-let balloonPhotosReady = false;
+let balloonPhotosReady = true;
 
 function preloadBalloonPhotos() {
     if (balloonPhotoPaths.length === 0) return;
@@ -620,6 +650,13 @@ function preloadBalloonPhotos() {
     });
 }
 preloadBalloonPhotos();
+const checkReady = setInterval(() => {
+    if (balloonPhotosReady) {
+        clearInterval(checkReady);
+        // заполнить шарики с фото
+        for (let i = 0; i < 8; i++) spawnBalloon();
+    }
+}, 200);
 
 class Balloon {
     constructor() {
@@ -729,9 +766,25 @@ bCanvas.addEventListener('click', e => {
     }
 });
 
-function spawnBalloon() { if (balloons.length < 14) balloons.push(new Balloon()); }
+function spawnBalloon() { 
+    if (balloonImages.length === 0) return;
+    if (balloons.length < 14) balloons.push(new Balloon());}
 setInterval(spawnBalloon, 1200);
-for (let i = 0; i < 8; i++) { const b = new Balloon(); b.y = Math.random() * bCanvas.height; balloons.push(b); }
+function initBalloonsWithPhotos() {
+    if (balloonPhotosReady && balloonImages.length > 0) {
+        for (let i = 0; i < 8; i++) {
+            const b = new Balloon();
+            // на всякий случай проверяем, что фото есть
+            if (b.img) {
+                b.y = Math.random() * bCanvas.height;
+                balloons.push(b);
+            }
+        }
+    } else {
+        setTimeout(initBalloonsWithPhotos, 200); // проверяем каждые 200мс
+    }
+}
+initBalloonsWithPhotos();
 
 function animateBalloons() {
     bCtx.clearRect(0, 0, bCanvas.width, bCanvas.height);
