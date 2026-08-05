@@ -8,7 +8,7 @@ const quizData = [
         answers: ["Плетка", "Книга", "Мяч", "Пицца"],
         correct: 0,
         description: '🐼 <strong>Плетка</strong> — по очевидным причинам!',
-        videoUrl: "videos/Видео-Илья.mp4"
+        videoUrl: "videos/Видео-Илья.MP4"
     },
     {
         question: "У кого был самый долгий обед в истории SD?",
@@ -36,7 +36,7 @@ const quizData = [
         answers: ["Бесплатно по связям", "100 000", "320", "120"],
         correct: 2,
         description: '🍱 <strong>320 ₽</strong> — зарплатный кешбек 1:1 по карте МТС Деньги.',
-        videoUrl: "videos/Видео-пацан2.mp4"
+        videoUrl: "videos/Видео-пацан2.MOV"
     },
     {
         question: "Выберите любимое хобби Насти",
