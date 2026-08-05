@@ -36,7 +36,7 @@ const quizData = [
         answers: ["Бесплатно по связям", "100 000", "320", "120"],
         correct: 2,
         description: '🍱 <strong>320 ₽</strong> — зарплатный кешбек 1:1 по карте МТС Деньги.',
-        videoUrl: "videos/Видео-пацан2.MOV"
+        videoUrl: "videos/Видео-Денис.mp4"
     },
     {
         question: "Выберите любимое хобби Насти",
