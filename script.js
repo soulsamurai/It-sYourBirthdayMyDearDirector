@@ -144,7 +144,7 @@ const quizData = [
         correct: 2,
         description: '❗ <strong>Главное </strong> — не смотреть в монитор Сержа (помогает с VPN)',
         imageUrl: "Homlin/Силует.png",
-        //videoUrl: "videos/Видео-.mp4"
+        videoUrl: "videos/Видео-Лиза.mp4"
     }
 ];
 
